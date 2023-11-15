@@ -54,7 +54,7 @@ const user = useSupabaseUser()
 onMounted(() => {
   watchEffect(() => {
     if (user.value) {
-      navigateTo("/spells")
+      navigateTo("/spellbooks")
     }
   })
 })

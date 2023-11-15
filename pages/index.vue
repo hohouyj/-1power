@@ -4,8 +4,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
-
+<script setup>
+const user = useSupabaseUser()
+onMounted(() => {
+  watchEffect(() => {
+    if (user.value) {
+      navigateTo("/spellbooks")
+    }
+  })
+})
 </script>
 
 <style scoped>
