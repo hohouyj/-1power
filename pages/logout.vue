@@ -1,3 +1,7 @@
+
+
+
+
 <script setup lang="ts">
 definePageMeta({
   middleware: ['auth']
@@ -12,9 +16,9 @@ async function signOut() {
     console.log(error)
   }
 }
-const user = useSupabaseUser()
+onMounted(() => { signOut() })
 </script>
 
 <template>
-  <v-btn block @click="signOut">Sign Out</v-btn>
+  <div>See ya</div>
 </template>

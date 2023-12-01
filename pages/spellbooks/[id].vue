@@ -1,11 +1,13 @@
 <template>
   <h1>{{ spellBook?.name + " Power " + spellBook?.power }}</h1>
-  <SpellCard v-for="spell in spells" :spell="spell"></SpellCard>
+  <SpellCard v-for="spell in spells" :spell="spell" :power="spellBook.power"></SpellCard>
   <v-btn @click="addSpell">Add Spell</v-btn>
 </template>
 
 <script setup>
-
+definePageMeta({
+  middleware: ['auth']
+})
 const spellBookId = useRoute().params.id
 const client = useSupabaseClient()
 

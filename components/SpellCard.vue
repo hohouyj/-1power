@@ -61,13 +61,30 @@
     <v-card v-else :title="spellName" :subtitle="spellTradition + ' Rank ' + spellRank" :text="spellDescription">
       <v-card-actions><v-btn @click="isEditing = !isEditing"><v-icon icon="mdi-pencil" />Edit</v-btn></v-card-actions>
     </v-card>
-
+    <pre>
+      {{ castingsMatrix.at(power).at(spellRank) }}
+    </pre>
   </div>
 </template>
 
 <script setup>
 
-const props = defineProps(['spell'])
+const castingsMatrix = ref(
+  [
+    [1],
+    [2, 1],
+    [3, 2, 1],
+    [4, 2, 1, 1],
+    [5, 2, 2, 1, 1],
+    [6, 3, 2, 2, 1, 1],
+    [7, 3, 2, 2, 2, 1, 1],
+    [8, 3, 2, 2, 2, 1, 1, 1],
+    [9, 3, 3, 2, 2, 2, 1, 1, 1],
+    [10, 3, 3, 3, 2, 2, 1, 1, 1, 1],
+    [11, 3, 3, 3, 3, 2, 1, 1, 1, 1, 1]
+  ])
+
+const props = defineProps(['spell', 'power'])
 
 const isEditing = ref(false)
 const spellName = ref(props.spell.name)
@@ -78,6 +95,7 @@ const spellTradition = ref(props.spell.tradition)
 const spellDescription = ref(props.spell.description)
 const loading = ref(false)
 const client = useSupabaseClient()
+const power = ref(props.power ? props.power : 0)
 
 async function updateSpell() {
   try {
